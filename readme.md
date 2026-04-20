@@ -6,9 +6,9 @@
 
 ## 一、目录结构
 
-├── experiments.py          # 实验主脚本（5组实验）
-├── environment.yml         # conda 环境配置文件
-├── readme.txt              # 本文件
+├── experiments.py          # 实验主脚本（5组实验）\
+├── environment.yml         # conda 环境配置文件 \
+├── readme.txt              # 本文件 
 
 
 ## 二、环境依赖
