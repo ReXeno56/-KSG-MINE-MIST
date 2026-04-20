@@ -6,18 +6,9 @@
 
 ## 一、目录结构
 
-期中论文/
 ├── experiments.py          # 实验主脚本（5组实验）
 ├── environment.yml         # conda 环境配置文件
 ├── readme.txt              # 本文件
-├── 期中论文选题.tex         # LaTeX 论文源文件
-├── 期中论文选题.pdf         # 编译后的 PDF 论文
-└── figures/                # 实验结果图片
-    ├── exp1_mse_table.png
-    ├── exp2_pred_vs_true.png
-    ├── exp3_heatmaps.png
-    ├── exp4_sample_requirement.png
-    └── exp5_inference_time.png
 
 
 ## 二、环境依赖
@@ -234,27 +225,3 @@ python experiments.py --exp 5    # 仅运行实验 5
 - **KSG**：基于 k 近邻的非参数估计，k=5
 - **MINE**：基于 Donsker-Varadhan 对偶的神经网络估计，每次从头训练
 - **MIST**：基于元学习的监督估计，加载预训练 Set Transformer 权重后直接推理
-
-
-## 七、常见问题
-
-### Q1: 运行时报 `ModuleNotFoundError: No module named 'mist_statinf'`
-A: 检查 `experiments.py` 中第 42 行 `sys.path.insert(0, ...)` 的路径是否指向你本地的 `mist/src` 目录。
-
-### Q2: 运行时报 `FileNotFoundError: weights.ckpt`
-A: 检查预训练权重文件是否存在于 `MIST_ROOT/checkpoints/mist/weights.ckpt`。
-如缺失，请从 HuggingFace 下载或参照 MIST README 中的说明获取。
-
-### Q3: MINE 部分运行极慢
-A: MINE 每次估计需从头训练 1000 步，这是其固有特性。
-如有 GPU 可显著加速。如仅测试流程，可修改 `_make_mine` 函数中的 `iters` 参数（例如改为 100）。
-
-### Q4: JAX 相关的 CUDA 报错
-A: 如使用 GPU 环境，确保安装了与 CUDA 版本匹配的 jaxlib：
-```bash
-pip install jaxlib==0.4.26  # 与 environment.yml 中一致
-```
-如在纯 CPU 环境运行，JAX 会自动使用 CPU 后端，不影响实验结果。
-
-### Q5: 实验随机性导致结果略有不同
-A: 实验使用固定随机种子 (seed=42)，但不同平台（CPU/GPU）的浮点运算顺序可能导致微小差异，属正常现象。
